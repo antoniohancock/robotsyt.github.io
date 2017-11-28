@@ -11,6 +11,14 @@
 	width: 374px;
 	text-align:center;
 }
+#THEcanvas{
+	top: 1px;
+	position:absolute;
+	box-shadow: 0 0 10px;
+	border-style: solid;
+	border: 2px;
+	outline: #000;
+}
 #image{
 	top: 10px;
 	left: 891px;
@@ -20,6 +28,7 @@
 	border:2px;
 	outline:#000;
 	border-style:solid;
+	box-shadow: 0 0 10px;
 }
 #List{
 	left: 504px;
@@ -46,14 +55,10 @@
 }
 </style>
 <script>
-
-
         const PUZZLE_DIFFICULTY = 2;
         const PUZZLE_HOVER_TINT = '#009900';
-
         var _stage;
         var _canvas;
-
         var _img;
         var _pieces;
         var _puzzleWidth;
@@ -62,10 +67,9 @@
         var _pieceHeight;
         var _currentPiece;
         var _currentDropPiece;  
-
         var _mouse;
-
-        function init(){
+			
+		function init(){
             _img = new Image();
             _img.addEventListener('load',onImage,false);
             _img.src = "logo.jpg";
@@ -81,6 +85,14 @@
         function setCanvas(){
             _canvas = document.getElementById('canvas');
             _stage = _canvas.getContext('2d');
+			_stage.save();
+			_stage.rect(188, 40, 200, 100);
+			_stage.fillStyle = 'red';
+			_stage.shadowColor = '#000';
+			_stage.shadowBlur = 60;
+			_stage.shadowOffsetX = 15;
+			_stage.shadowOffsetY = 15;
+			_stage.fill();
             _canvas.width = _puzzleWidth;
             _canvas.height = _puzzleHeight;
             _canvas.style.border = "1px solid black";
@@ -261,10 +273,13 @@
 </script>
 </head>
  
-<body onLoad="init();">
+<body bgcolor="#CCCCCC" onLoad="init();">
 <div id="title">Puzzle Mania</div>
+<div id="THEcanvas"></div>
 <canvas id="canvas" width="300" height="300" top="100px" style="border: 1px solid black;"></canvas>
-
+<script>
+  setCanvas("THEcanvas");
+</script>
 <div id="buttonEasy"><a href="IICP.html">
     <input type="button" id="Easy" Value="Easy";></a>
 </div>
@@ -274,7 +289,7 @@
 <div id="buttonHard"><a href="hard.html">
     <input type="button" id="Hard" Value="Hard" ;></a>
 </div>
-<div id="image"><img src="logo.jpg"></div>
+<div id="image"><img src="logo.jpg" width="485" height="489"></div>
 <div id="List">STEPS<br>1.This is a puzzle game match the pieces to the picture on the right.<br>2.Choose the game mode.<br>3.click the left picture to start.<br>4.Match the puzzle to the image on the right.</div>
 
 
